@@ -1,29 +1,45 @@
-import { useSelector, useDispatch } from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import classes from './Counter.module.css'
 
-const Counter = () => {
-	const dispatch = useDispatch()
+class Counter extends Component {
+	incrementHandler = () => this.props.increment()
 
-	const counter = useSelector(state => state.counter) // extract a slice of data from redux state (store)
-	// useSelector sets a subscibtion for this component in the store, the variable (counter) will recieve the latest value automatically if the value of the variable in the store/state changes!
+	decrementHandler = () => this.props.decrement()
 
-	const incrementHandler = () => dispatch({ type: 'increment' })
+	toggleCounterHandler = () => {}
 
-	const decrementHandler = () => dispatch({ type: 'decrement' })
-
-	const toggleCounterHandler = () => {}
-
-	return (
-		<main className={classes.counter}>
-			<h1>Redux Counter</h1>
-			<div className={classes.value}>{counter}</div>
-			<div>
-				<button onClick={incrementHandler}>Increment</button>
-				<button onClick={decrementHandler}>Decrement</button>
-			</div>
-			<button onClick={toggleCounterHandler}>Toggle Counter</button>
-		</main>
-	)
+	render() {
+		return (
+			<main className={classes.counter}>
+				<h1>Redux Counter</h1>
+				<div className={classes.value}>{this.props.counter}</div>
+				<div>
+					<button onClick={this.incrementHandler}>Increment</button>
+					<button onClick={this.decrementHandler}>Decrement</button>
+				</div>
+				<button onClick={this.toggleCounterHandler}>Toggle Counter</button>
+			</main>
+		)
+	}
 }
 
-export default Counter
+const mapStateToProps = state => {
+	return {
+		counter: state.counter,
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		increment: () => dispatch({ type: 'increment' }),
+		decrement: () => dispatch({ type: 'decrement' }),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)
+
+// connect(mapStateToProps,mapDispatchToProps)(Counter)
+
+// this funcky syntax is called higher order component, we cxecute the connect fntion
+// it returns a new function which then takes counter as an argument
