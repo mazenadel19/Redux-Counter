@@ -22,6 +22,9 @@ const counterReducer = (state = initialState, action) => {
 	return state
 }
 //state
-const store = createStore(counterReducer)
+const store = createStore(
+	counterReducer,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), // <-- redux devtools
+)
 
 export default store
