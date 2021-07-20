@@ -5,10 +5,10 @@ import { counterActions } from '../store/index'
 const Counter = () => {
 	const dispatch = useDispatch()
 
-	const counter = useSelector(state => state.counter) // extract a slice of data from redux state (store)
+	const counter = useSelector(state => state.counter.value) // extract a slice of data from redux state (store)
 	// useSelector sets a subscibtion for this component in the store, the variable (counter) will recieve the latest value automatically if the value of the variable in the store/state changes!
-	
-	const showCounter = useSelector(state => state.showCounter)
+
+	const showCounter = useSelector(state => state.counter.showCounter)
 
 	const incrementHandler = () => dispatch(counterActions.increment())
 
