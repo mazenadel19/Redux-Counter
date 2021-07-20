@@ -1,20 +1,22 @@
 import { useSelector, useDispatch } from 'react-redux'
 import classes from './Counter.module.css'
+import { counterActions } from '../store/index'
 
 const Counter = () => {
 	const dispatch = useDispatch()
 
 	const counter = useSelector(state => state.counter) // extract a slice of data from redux state (store)
 	// useSelector sets a subscibtion for this component in the store, the variable (counter) will recieve the latest value automatically if the value of the variable in the store/state changes!
+	
 	const showCounter = useSelector(state => state.showCounter)
 
-	const incrementHandler = () => dispatch({ type: 'increment' })
+	const incrementHandler = () => dispatch(counterActions.increment())
 
-	const increaseHandler = () => dispatch({ type: 'increase', amount: 5 })
+	const increaseHandler = () => dispatch(counterActions.increase(5)) // { type:SOME_UNIQUE_IDENTIFIER, payload:10 }
 
-	const decrementHandler = () => dispatch({ type: 'decrement' })
+	const decrementHandler = () => dispatch(counterActions.decrement())
 
-	const toggleCounterHandler = () => dispatch({ type: 'toggle' })
+	const toggleCounterHandler = () => dispatch(counterActions.toogleCounter())
 
 	return (
 		<main className={classes.counter}>
