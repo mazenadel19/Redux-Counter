@@ -1,5 +1,6 @@
 # Redux Counter
 
+
 ## 🚀 Getting Started
 
 - open terminal
@@ -7,3 +8,5 @@
 - cd redux-counter
 - `npm i`
 - `npm start` or `yarn start`
+
+PS: there is not an actual auth here, just type a vaild email and any password
